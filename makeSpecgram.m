@@ -1,0 +1,12 @@
+[Y, Fs] = audioread('clean.mp3');
+Y = sum(Y, 2);
+N = 1024;
+S = spectrogram(Y, N);
+N = size(S, 1)*2-1;
+freq = linspace(0, Fs*N/(N+1), N);
+freq = freq(1:size(S, 1));
+time = (1:length(Y))/Fs;
+imagesc(time, freq, log(abs(S)));
+ylim([0, 8000]);
+xlabel('Time (sec)');
+ylabel('Freq (hz)');
